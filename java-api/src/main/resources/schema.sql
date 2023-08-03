@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS  Trade (
 );
 CREATE TABLE IF NOT EXISTS  Counter_party (
     counter_party_id INT NOT NULL AUTO_INCREMENT,
-    issuer_name VARCHAR(70) NOT NULL,
+    issuer_name VARCHAR(100) NOT NULL,
     PRIMARY KEY (counter_party_id)
 );
 CREATE TABLE IF NOT EXISTS  Security (

@@ -5,9 +5,9 @@ CREATE TABLE owners (
     name VARCHAR(250) NOT NULL
 );
 
-DROP TABLE IF EXISTS dogs;
+DROP TABLE IF EXISTS bonds;
 
-CREATE TABLE dogs (
+CREATE TABLE bonds (
     dog_id INT NOT NULL,
     name VARCHAR(250) NOT NULL,
     age INT NOT NULL,
@@ -17,5 +17,5 @@ CREATE TABLE dogs (
 );
 
 create view dogs_n_owners as
-select d.dog_id as id, o.name as dog_owner, d.name as dog
-from dogs as d inner join owners as o on d.owner_id = o.owner_id;
+select d.dog_id as id, o.name as dog_owner, d.name as bonds
+from bonds as d inner join owners as o on d.owner_id = o.owner_id;

@@ -55,3 +55,4 @@ CREATE TABLE IF NOT EXISTS  Trade (
     FOREIGN KEY (security_id) REFERENCES Security (security_id),
     FOREIGN KEY (counter_party_id) REFERENCES Counter_party (counter_party_id)
 );
+

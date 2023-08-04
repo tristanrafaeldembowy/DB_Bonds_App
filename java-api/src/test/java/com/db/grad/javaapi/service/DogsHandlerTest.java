@@ -1,6 +1,6 @@
 package com.db.grad.javaapi.service;
 
-import com.db.grad.javaapi.model.Dog;
+import com.db.grad.javaapi.model.Bonds;
 import com.db.grad.javaapi.repository.DogsRepository;
 import org.junit.Ignore;
 import org.junit.jupiter.api.Test;
@@ -31,11 +31,11 @@ public class DogsHandlerTest
     public  void    add_a_dog_return_number_of_dogs_in_repo_is_one()
     {
         // arrange
-        Dog theDog = new Dog();
-        theDog.setName("Bruno");
-        Mockito.when(itsDogsRepo.save(theDog)).thenReturn(theDog);
+        Bonds theBonds = new Bonds();
+        theBonds.setName("Bruno");
+        Mockito.when(itsDogsRepo.save(theBonds)).thenReturn(theBonds);
         Mockito.when(itsDogsRepo.count()).thenReturn(1L);
-        cut.addDog( theDog );
+        cut.addDog(theBonds);
 
         int expectedResult = 1;
 
@@ -50,15 +50,15 @@ public class DogsHandlerTest
     public  void    add_several_dogs_return_number_of_dogs_match_number_added()
     {
         // arrange
-        Dog theDog = new Dog();
-        theDog.setName("Bruno");
-        cut.addDog( theDog );
-        theDog = new Dog();
-        theDog.setName("Frank");
-        cut.addDog( theDog );
-        theDog = new Dog();
-        theDog.setName("Penny");
-        cut.addDog( theDog );
+        Bonds theBonds = new Bonds();
+        theBonds.setName("Bruno");
+        cut.addDog(theBonds);
+        theBonds = new Bonds();
+        theBonds.setName("Frank");
+        cut.addDog(theBonds);
+        theBonds = new Bonds();
+        theBonds.setName("Penny");
+        cut.addDog(theBonds);
         Mockito.when(itsDogsRepo.count()).thenReturn(3L);
 
         int expectedResult = 3;
@@ -75,25 +75,25 @@ public class DogsHandlerTest
     public  void    add_dog_and_remove_dog_return_number_of_dogs_is_zero()
     {
         // arrange
-        Dog theDog = new Dog();
-        theDog.setName("Bruno");
-        Mockito.when(itsDogsRepo.save(theDog)).thenReturn(theDog);
-        Dog uniqueDog = cut.addDog( theDog );
+        Bonds theBonds = new Bonds();
+        theBonds.setName("Bruno");
+        Mockito.when(itsDogsRepo.save(theBonds)).thenReturn(theBonds);
+        Bonds uniqueBonds = cut.addDog(theBonds);
 
-        Optional<Dog> opt = Optional.of(theDog);
-        Mockito.when(itsDogsRepo.findById(theDog.getId())).thenReturn(opt);
+        Optional<Bonds> opt = Optional.of(theBonds);
+        Mockito.when(itsDogsRepo.findById(theBonds.getId())).thenReturn(opt);
 
         long expectedResult = 0;
         boolean expectedStatus = true;
 
         // act
-        boolean actualStatus = cut.removeDog( uniqueDog.getId() );
+        boolean actualStatus = cut.removeDog( uniqueBonds.getId() );
         long actualResult = cut.getNoOfDogs();
 
         // assert
         assertEquals( expectedStatus, actualStatus);
         assertEquals( expectedResult, actualResult );
-        verify(itsDogsRepo, times(1)).delete(theDog);
+        verify(itsDogsRepo, times(1)).delete(theBonds);
     }
 
     // This test covers the other logic path in cut.removeDog()
@@ -102,15 +102,15 @@ public class DogsHandlerTest
     public  void    add_dog_and_remove_dog_that_doess_not_exist_return_number_of_dogs_is_one()
     {
         // arrange
-        Dog theDog = new Dog();
-        theDog.setName("Bruno");
-        Dog uniqueDog = cut.addDog( theDog );
+        Bonds theBonds = new Bonds();
+        theBonds.setName("Bruno");
+        Bonds uniqueBonds = cut.addDog(theBonds);
 
         long invalidId = 33;
         long expectedResult = 1;
         boolean expectedStatus = false;
 
-        Optional<Dog> opt = Optional.empty();
+        Optional<Bonds> opt = Optional.empty();
         Mockito.when(itsDogsRepo.findById(invalidId)).thenReturn(opt);
 
         Mockito.when(itsDogsRepo.count()).thenReturn(1L);
@@ -123,35 +123,35 @@ public class DogsHandlerTest
         // assert
         assertEquals( expectedStatus, actualStatus);
         assertEquals( expectedResult, actualResult );
-        verify(itsDogsRepo, times(0)).delete(theDog);
+        verify(itsDogsRepo, times(0)).delete(theBonds);
     }
 
     @Test
     public  void    find_dog_by_valid_id_returns_one_dog()
     {
         // arrange
-        Dog theDog = new Dog();
-        theDog.setName("Bruno");
-        cut.addDog( theDog );
-        theDog = new Dog();
-        theDog.setName("Frank");
-        Mockito.when(itsDogsRepo.save(theDog)).thenReturn(theDog);
-        Dog addedDog = cut.addDog( theDog );
-        Dog expectedDog = theDog;
-        theDog = new Dog();
-        theDog.setName("Penny");
-        cut.addDog( theDog );
+        Bonds theBonds = new Bonds();
+        theBonds.setName("Bruno");
+        cut.addDog(theBonds);
+        theBonds = new Bonds();
+        theBonds.setName("Frank");
+        Mockito.when(itsDogsRepo.save(theBonds)).thenReturn(theBonds);
+        Bonds addedBonds = cut.addDog(theBonds);
+        Bonds expectedBonds = theBonds;
+        theBonds = new Bonds();
+        theBonds.setName("Penny");
+        cut.addDog(theBonds);
 
-        Dog jpaDog = addedDog;
-        Optional<Dog> opt = Optional.of(addedDog);
-        Mockito.when(itsDogsRepo.findById(addedDog.getId())).thenReturn(opt);
+        Bonds jpaBonds = addedBonds;
+        Optional<Bonds> opt = Optional.of(addedBonds);
+        Mockito.when(itsDogsRepo.findById(addedBonds.getId())).thenReturn(opt);
 
         // act
-        Dog actualResult = cut.getDogById( addedDog.getId() );
+        Bonds actualResult = cut.getDogById( addedBonds.getId() );
 
         // assert
-        assertEquals( expectedDog.getId(), actualResult.getId() );
-        assertEquals( expectedDog.getName(), actualResult.getName() );
+        assertEquals( expectedBonds.getId(), actualResult.getId() );
+        assertEquals( expectedBonds.getName(), actualResult.getName() );
     }
 
     @Ignore
@@ -159,18 +159,18 @@ public class DogsHandlerTest
     public  void    find_dog_by_invalid_id_returns_null_dog()
     {
         // arrange
-        Dog theDog = new Dog();
-        theDog.setName("Bruno");
-        cut.addDog( theDog );
-        theDog = new Dog();
-        theDog.setName("Frank");
-        cut.addDog( theDog );
-        theDog = new Dog();
-        theDog.setName("Penny");
-        cut.addDog( theDog );
+        Bonds theBonds = new Bonds();
+        theBonds.setName("Bruno");
+        cut.addDog(theBonds);
+        theBonds = new Bonds();
+        theBonds.setName("Frank");
+        cut.addDog(theBonds);
+        theBonds = new Bonds();
+        theBonds.setName("Penny");
+        cut.addDog(theBonds);
         long invalidId = 33;
 
-        Optional<Dog> opt = Optional.empty();
+        Optional<Bonds> opt = Optional.empty();
         Mockito.when(itsDogsRepo.findById(invalidId)).thenReturn(opt);
 
         // act
@@ -183,27 +183,27 @@ public class DogsHandlerTest
     public  void    find_dog_by_name_returns_one_dog()
     {
         // arrange
-        Dog theDog = new Dog();
-        theDog.setName("Bruno");
-        cut.addDog( theDog );
-        theDog = new Dog();
-        theDog.setName("Frank");
-        cut.addDog( theDog );
-        Dog expectedDog = theDog;
+        Bonds theBonds = new Bonds();
+        theBonds.setName("Bruno");
+        cut.addDog(theBonds);
+        theBonds = new Bonds();
+        theBonds.setName("Frank");
+        cut.addDog(theBonds);
+        Bonds expectedBonds = theBonds;
         String dogToFind = "Frank";
-        theDog = new Dog();
-        theDog.setName("Penny");
-        cut.addDog( theDog );
-        ArrayList<Dog> expectedList = new ArrayList<>();
-        expectedList.add(expectedDog);
+        theBonds = new Bonds();
+        theBonds.setName("Penny");
+        cut.addDog(theBonds);
+        ArrayList<Bonds> expectedList = new ArrayList<>();
+        expectedList.add(expectedBonds);
         Mockito.when(itsDogsRepo.findByName(Mockito.any())).thenReturn(expectedList);
 
         // act
-        Dog actualResult = cut.getDogByName( dogToFind );
+        Bonds actualResult = cut.getDogByName( dogToFind );
 
         // assert
-        assertEquals( expectedDog.getId(), actualResult.getId() );
-        assertEquals( expectedDog.getName(), actualResult.getName() );
+        assertEquals( expectedBonds.getId(), actualResult.getId() );
+        assertEquals( expectedBonds.getName(), actualResult.getName() );
     }
 
 
@@ -211,22 +211,22 @@ public class DogsHandlerTest
     public  void    find_dog_by_name_returns_null_because_many_dogs_with_same_name()
     {
         // arrange
-        Dog theDog = new Dog();
-        theDog.setName("Bruno");
-        cut.addDog( theDog );
-        theDog = new Dog();
-        theDog.setName("Bruno");
-        cut.addDog( theDog );
-        Dog expectedDog = theDog;
+        Bonds theBonds = new Bonds();
+        theBonds.setName("Bruno");
+        cut.addDog(theBonds);
+        theBonds = new Bonds();
+        theBonds.setName("Bruno");
+        cut.addDog(theBonds);
+        Bonds expectedBonds = theBonds;
         String dogToFind = "Bruno";
-        theDog = new Dog();
-        theDog.setName("Penny");
-        cut.addDog( theDog );
-        ArrayList<Dog> expectedList = new ArrayList<>();
+        theBonds = new Bonds();
+        theBonds.setName("Penny");
+        cut.addDog(theBonds);
+        ArrayList<Bonds> expectedList = new ArrayList<>();
         Mockito.when(itsDogsRepo.findByName(Mockito.any())).thenReturn(expectedList);
 
         // act
-        Dog actualResult = cut.getDogByName( dogToFind );
+        Bonds actualResult = cut.getDogByName( dogToFind );
 
         // assert
         assertNull( actualResult );
@@ -237,20 +237,20 @@ public class DogsHandlerTest
     {
         // arrange
 //        DogHandler cut = new DogHandler();
-        Dog theDog = new Dog();
-        theDog.setName("Bruno");
-        cut.addDog( theDog );
-        theDog = new Dog();
-        theDog.setName("Frank");
-        cut.addDog( theDog );
-        theDog = new Dog();
-        theDog.setName("Penny");
-        cut.addDog( theDog );
-        ArrayList<Dog> expectedList = new ArrayList<>();
+        Bonds theBonds = new Bonds();
+        theBonds.setName("Bruno");
+        cut.addDog(theBonds);
+        theBonds = new Bonds();
+        theBonds.setName("Frank");
+        cut.addDog(theBonds);
+        theBonds = new Bonds();
+        theBonds.setName("Penny");
+        cut.addDog(theBonds);
+        ArrayList<Bonds> expectedList = new ArrayList<>();
         Mockito.when(itsDogsRepo.findByName(Mockito.any())).thenReturn(expectedList);
 
         // act
-        Dog actualResult = cut.getDogByName( "Selvyn" );
+        Bonds actualResult = cut.getDogByName( "Selvyn" );
 
         // assert
         assertNull( actualResult );
@@ -261,25 +261,25 @@ public class DogsHandlerTest
     public  void    update_dog_that_exists_returns_dog_id()
     {
         // arrange
-        Dog theDog = new Dog();
-        theDog.setName("Bruno");
-        cut.addDog( theDog );
-        theDog = new Dog();
-        theDog.setName("Frank");
-        Mockito.when(itsDogsRepo.save(theDog)).thenReturn(theDog);
-        Dog expectedDog = cut.addDog( theDog );
-        Dog dogToUpdate = theDog;
+        Bonds theBonds = new Bonds();
+        theBonds.setName("Bruno");
+        cut.addDog(theBonds);
+        theBonds = new Bonds();
+        theBonds.setName("Frank");
+        Mockito.when(itsDogsRepo.save(theBonds)).thenReturn(theBonds);
+        Bonds expectedBonds = cut.addDog(theBonds);
+        Bonds bondsToUpdate = theBonds;
         String dogToFind = "Frank";
-        theDog = new Dog();
-        theDog.setName("Penny");
-        cut.addDog( theDog );
-        Mockito.when(itsDogsRepo.save(dogToUpdate)).thenReturn(dogToUpdate);
+        theBonds = new Bonds();
+        theBonds.setName("Penny");
+        cut.addDog(theBonds);
+        Mockito.when(itsDogsRepo.save(bondsToUpdate)).thenReturn(bondsToUpdate);
 
         // act
-        dogToUpdate.setName("Charlie");
-        Dog actualDog = cut.updateDogDetails( dogToUpdate );
+        bondsToUpdate.setName("Charlie");
+        Bonds actualBonds = cut.updateDogDetails(bondsToUpdate);
 
         // assert
-        assertEquals( expectedDog, actualDog );
+        assertEquals(expectedBonds, actualBonds);
     }
 }

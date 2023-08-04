@@ -1,7 +1,7 @@
 package com.db.grad.javaapi.controller;
 
 import com.db.grad.javaapi.exception.ResourceNotFoundException;
-import com.db.grad.javaapi.model.Dog;
+import com.db.grad.javaapi.model.Bonds;
 import com.db.grad.javaapi.service.DogHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -25,27 +25,27 @@ public class DogsController {
     }
 
     @GetMapping("/dogs")
-    public List <Dog> getAllDogs() {
+    public List <Bonds> getAllDogs() {
         return dogsService.getAllDogs();
     }
 
     @GetMapping("/dogs/{id}")
-    public ResponseEntity < Dog > getEmployeeById(@PathVariable(value = "id") Long id)
+    public ResponseEntity <Bonds> getEmployeeById(@PathVariable(value = "id") Long id)
     throws ResourceNotFoundException {
-        Dog dogs = dogsService.getDogById(id);
+        Bonds dogs = dogsService.getDogById(id);
         return ResponseEntity.ok().body(dogs);
     }
 
     @PostMapping("/dogs")
-    public Dog createDog(@Valid @RequestBody Dog dog) {
-        return dogsService.addDog(dog);
+    public Bonds createDog(@Valid @RequestBody Bonds bonds) {
+        return dogsService.addDog(bonds);
     }
 
     @PutMapping("/dogs/{id}")
-    public ResponseEntity < Dog > updateDog(@PathVariable(value = "id") Long id,
-        @Valid @RequestBody Dog dogDetails) throws ResourceNotFoundException {
+    public ResponseEntity <Bonds> updateDog(@PathVariable(value = "id") Long id,
+                                            @Valid @RequestBody Bonds bondsDetails) throws ResourceNotFoundException {
 
-        final Dog updatedDogs = dogsService.updateDogDetails(dogDetails);
+        final Bonds updatedDogs = dogsService.updateDogDetails(bondsDetails);
         return ResponseEntity.ok(updatedDogs);
     }
 

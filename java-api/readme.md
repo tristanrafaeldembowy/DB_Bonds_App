@@ -1,8 +1,8 @@
 # Dogs APIs
 
-![dogs](dogs_api.jpg)
+![bonds](dogs_api.jpg)
 
-In this example, we are creating crud operations and exposing them through REST APIs so that UI clients can invoke these operations. The demo operations enable the clients to modify the dogs records in database.
+In this example, we are creating crud operations and exposing them through REST APIs so that UI clients can invoke these operations. The demo operations enable the clients to modify the bonds records in database.
 
 The purpose of this demo is to showcase the nuts and bolts, which make this interaction possible, not covering the complexity in business logic involved in real world applications.
 
@@ -61,7 +61,7 @@ H2 is an open-source lightweight Java database. It can be embedded in Java appli
 
 **Schema**
 
-For this example we have a table called dog. Table is automatically created when springboot application starts using following schema.sql
+For this example we have a table called bonds. Table is automatically created when springboot application starts using following schema.sql
 
 	java-api\src\main\resources\schema.sql
 
@@ -69,7 +69,7 @@ You can modify this file to add new database tables.
 
 **Data**
 
-To populate data into table dog, we have used data.sql which has insert statements.
+To populate data into table bonds, we have used data.sql which has insert statements.
 
 	java-api\src\main\resources\data.sql
 
@@ -97,7 +97,7 @@ To run the maven project use following mvn command
 
 **REST API are exposed as:**
 
-	http://localhost:8080/api/v1/dogs
+	http://localhost:8080/api/v1/bonds
 
 ![REST API](REST_API_URL.PNG)
 

@@ -36,3 +36,29 @@
     transform: rotate(360deg);
   }
 }
+
+.divider:after,
+.divider:before {
+content: "";
+flex: 1;
+height: 1px;
+background: #eee;
+}
+.h-custom {
+height: calc(100% - 73px);
+}
+@media (max-width: 450px) {
+.h-custom {
+height: 100%;
+}
+}
+
+.button-login{
+
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+}
+
+.db-color{
+  color:"#1620a8 !Important"
+}

@@ -1,5 +1,5 @@
 /* Book (book_id, book_name */
-INSERT INTO Book
+INSERT INTO book
 (book_name)
 SELECT DISTINCT book_name
 FROM CSVREAD('C:/work/DB_Bonds_App/db-bonds-data.csv');
@@ -11,7 +11,7 @@ FROM CSVREAD('C:/work/DB_Bonds_App/db-bonds-data.csv');
 ----
 ----
 /* Security (security_id, isin, cusip, issuer_name, coupon_percent, bond_currency, type, face_value_mn, bond_maturity_date, bond_holder, status) */
-INSERT INTO Security
+INSERT INTO security
 (isin, cusip, issuer_name, coupon_percent, bond_currency, type, face_value_mn, bond_maturity_date, bond_holder, status)
 SELECT isin, cusip, issuer_name, coupon_percent, bond_currency, type, face_value_mn, bond_maturity_date, bond_holder, status
 FROM CSVREAD('C:/work/DB_Bonds_App/db-bonds-data.csv');
@@ -23,7 +23,7 @@ FROM CSVREAD('C:/work/DB_Bonds_App/db-bonds-data.csv');
 ----FROM CSVREAD('C:/work/DB_Bonds_App/db-bonds-data.csv');
 --
 /* Counter_party (counter_party_id, issuer_name) */
-INSERT INTO Counter_party
+INSERT INTO counter_party
 (issuer_name)
 SELECT DISTINCT issuer_name
 FROM CSVREAD('C:/work/DB_Bonds_App/db-bonds-data.csv');

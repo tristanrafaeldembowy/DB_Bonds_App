@@ -1,30 +1,30 @@
 
-CREATE TABLE IF NOT EXISTS Book (
+CREATE TABLE IF NOT EXISTS book (
     book_id INT NOT NULL AUTO_INCREMENT,
     book_name VARCHAR(70) NOT NULL,
     PRIMARY KEY (book_id)
 );
 
-CREATE TABLE IF NOT EXISTS  Users (
+CREATE TABLE IF NOT EXISTS  users (
     user_id INT NOT NULL AUTO_INCREMENT,
     email VARCHAR(40) NOT NULL UNIQUE,
 --    password VARCHAR(30) NOT NULL,
     PRIMARY KEY (user_id)
 );
-CREATE TABLE IF NOT EXISTS  Book_users (
+CREATE TABLE IF NOT EXISTS  book_users (
     book_id INT NOT NULL,
     user_id INT NOT NULL,
     PRIMARY KEY (book_id, user_id),
-    FOREIGN KEY (book_id) REFERENCES Book (book_id),
-    FOREIGN KEY (user_id) REFERENCES Users (user_id)
+    FOREIGN KEY (book_id) REFERENCES book (book_id),
+    FOREIGN KEY (user_id) REFERENCES users (user_id)
 );
 
-CREATE TABLE IF NOT EXISTS  Counter_party (
+CREATE TABLE IF NOT EXISTS  counter_party (
     counter_party_id INT NOT NULL AUTO_INCREMENT,
     issuer_name VARCHAR(100) NOT NULL,
     PRIMARY KEY (counter_party_id)
 );
-CREATE TABLE IF NOT EXISTS  Security (
+CREATE TABLE IF NOT EXISTS  security (
     security_id INT NOT NULL AUTO_INCREMENT,
     isin VARCHAR(50),
     cusip VARCHAR(50),
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS  Security (
     status ENUM('active', 'inactive') NOT NULL,
     PRIMARY KEY (security_id)
 );
-CREATE TABLE IF NOT EXISTS  Trade (
+CREATE TABLE IF NOT EXISTS  trade (
     trade_id INT NOT NULL AUTO_INCREMENT,
     book_id INT NOT NULL,
     security_id INT NOT NULL,
@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS  Trade (
     unit_price FLOAT NOT NULL,
     quantity INT NOT NULL,
     PRIMARY KEY (trade_id),
-    FOREIGN KEY (book_id) REFERENCES Book (book_id),
-    FOREIGN KEY (security_id) REFERENCES Security (security_id),
-    FOREIGN KEY (counter_party_id) REFERENCES Counter_party (counter_party_id)
+    FOREIGN KEY (book_id) REFERENCES book (book_id),
+    FOREIGN KEY (security_id) REFERENCES security (security_id),
+    FOREIGN KEY (counter_party_id) REFERENCES counter_party (counter_party_id)
 );

@@ -43,7 +43,7 @@ public class security {
     public String getCusip() {
         return cusip;
     }
-    public void setName(String cusip) {
+    public void setCusip(String cusip) {
         this.cusip = cusip;
     }
     @Column(name = "issuer_name", nullable = false)
@@ -67,7 +67,42 @@ public class security {
     public void setBond_currency(String bond_currency) {
         this.bond_currency = bond_currency;
     }
+    @Column(name = "face_value_mn", nullable = false)
+    public String getFace_value_mn() {
+        return face_value_mn;
+    }
+    public void setFace_value_mn(String face_value_mn) {
+        this.face_value_mn = face_value_mn;
+    }
+    @Column(name = "type", nullable = false)
+    public String getType() {
+        return type;
+    }
+    public void setType(String type) {
+        this.type = type;
+    }
+    @Column(name = "bond_maturity_date", nullable = false)
+    public Date getBond_maturity_date() {
+        return bond_maturity_date;
+    }
+    public void setBond_maturity_date(Date bond_maturity_date) {
+        this.bond_maturity_date = bond_maturity_date;
+    }
+    @Column(name = "bond_holder", nullable = false)
+    public String getBond_holder() {
+        return bond_holder;
+    }
+    public void setBond_holder(String bond_holder) {
+        this.bond_holder = bond_holder;
+    }
 
+    @Column(name = "status", nullable = false)
+    public String getStatus() {
+        return status;
+    }
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
 
 

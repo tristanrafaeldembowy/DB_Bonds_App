@@ -104,6 +104,4 @@ public class security {
         this.status = status;
     }
 
-
-
 }

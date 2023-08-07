@@ -15,11 +15,11 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/v1")
 @CrossOrigin(origins = "http://localhost:3000")
-public class BondsController {
+public class SecurityController {
     private DogHandler dogsService;
 
     @Autowired
-    public BondsController(DogHandler ds)
+    public SecurityController(DogHandler ds)
     {
         dogsService = ds;
     }
